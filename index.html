@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<!-- Theme -->
+<html lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') || 'false' }"
+    x-init="$watch('darkMode', (val) => localStorage.setItem('darkMode', val))" :class="{ 'dark': darkMode === 'true' }"
+    x-cloak>
+
+<head>
+    <title>TM_AlpineJs</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon"
+        href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgd2lkdGg9IjM1My4xbW0iCiAgIGhlaWdodD0iMzUzLjFtbSIKICAgdmlld0JveD0iMCAwIDEwMDAuOSAxMDAwLjkiCiAgIHZlcnNpb249IjEuMSIKICAgaWQ9InN2ZzIwMTQiCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGRlZnMKICAgICBpZD0iZGVmczIwMDgiPgogICAgPHJhZGlhbEdyYWRpZW50CiAgICAgICBpZD0iYSIKICAgICAgIGN4PSI1MDAiCiAgICAgICBjeT0iNDk0LjYxIgogICAgICAgcj0iNDU5LjIxIgogICAgICAgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8c3RvcAogICAgICAgICBvZmZzZXQ9IjAiCiAgICAgICAgIHN0b3AtY29sb3I9IiMxZTI5M2IiCiAgICAgICAgIGlkPSJzdG9wMTk5NSIKICAgICAgICAgc3R5bGU9InN0b3AtY29sb3I6IzE5MWQyNDtzdG9wLW9wYWNpdHk6MTsiIC8+CiAgICAgIDxzdG9wCiAgICAgICAgIG9mZnNldD0iMC41IgogICAgICAgICBzdG9wLWNvbG9yPSIjMjAyZjNhIgogICAgICAgICBzdG9wLW9wYWNpdHk9IjAuOTciCiAgICAgICAgIGlkPSJzdG9wMTk5NyIKICAgICAgICAgc3R5bGU9InN0b3AtY29sb3I6IzE5MWQyNDtzdG9wLW9wYWNpdHk6MTsiIC8+CiAgICAgIDxzdG9wCiAgICAgICAgIG9mZnNldD0iMC43IgogICAgICAgICBzdG9wLWNvbG9yPSIjMjk0NDM4IgogICAgICAgICBzdG9wLW9wYWNpdHk9IjAuODUiCiAgICAgICAgIGlkPSJzdG9wMTk5OSIKICAgICAgICAgc3R5bGU9InN0b3AtY29sb3I6IzE5MWQyNDtzdG9wLW9wYWNpdHk6MC45OyIgLz4KICAgICAgPHN0b3AKICAgICAgICAgb2Zmc2V0PSIwLjgiCiAgICAgICAgIHN0b3AtY29sb3I9IiMzODY5MzQiCiAgICAgICAgIHN0b3Atb3BhY2l0eT0iMC42NSIKICAgICAgICAgaWQ9InN0b3AyMDAxIgogICAgICAgICBzdHlsZT0ic3RvcC1jb2xvcjojMTkxZDI0O3N0b3Atb3BhY2l0eTowLjc7IiAvPgogICAgICA8c3RvcAogICAgICAgICBvZmZzZXQ9IjAuOSIKICAgICAgICAgc3RvcC1jb2xvcj0iIzRkOWUyZiIKICAgICAgICAgc3RvcC1vcGFjaXR5PSIwLjM3IgogICAgICAgICBpZD0ic3RvcDIwMDMiCiAgICAgICAgIHN0eWxlPSJzdG9wLWNvbG9yOiMxOTFkMjQ7c3RvcC1vcGFjaXR5OjAuNDsiIC8+CiAgICAgIDxzdG9wCiAgICAgICAgIG9mZnNldD0iMSIKICAgICAgICAgc3RvcC1jb2xvcj0iIzY5ZTIyOCIKICAgICAgICAgc3RvcC1vcGFjaXR5PSIwIgogICAgICAgICBpZD0ic3RvcDIwMDUiCiAgICAgICAgIHN0eWxlPSJzdG9wLWNvbG9yOiMxOTFkMjQ7c3RvcC1vcGFjaXR5OjA7IiAvPgogICAgPC9yYWRpYWxHcmFkaWVudD4KICA8L2RlZnM+CiAgPGNpcmNsZQogICAgIGN4PSI1MDAuNDUiCiAgICAgY3k9IjUwMC40NSIKICAgICByPSI1MDAuNDUiCiAgICAgZmlsbD0iIzY5ZTIyOCIKICAgICBpZD0iY2lyY2xlMjAxMCIKICAgICBzdHlsZT0iZmlsbDojYWI0YWRmO2ZpbGwtb3BhY2l0eToxIiAvPgogIDxwYXRoCiAgICAgZD0iTTkzMi4yMiw0MjYuMTljLTEyLjQ5LDE0LjM3LTI2LjQ3LDMwLjc2LTMxLjA2LDM2LjQ0bC00LjgsNC43OUExNDYuNTYsMTQ2LjU2LDAsMCwxLDY4OS4wOSwyNjAuMTVsNC44LTQuOGM1LjY3LTQuNTksMjcuNTEtMjMuMyw0OC41My00MS41OUw3NjcuNDcsMTkyYzIxLTE4LjI4LDE4LjY3LTQ1LTUuMjEtNTkuMjksMCwwLTE0NS40Ny04Ny4yNy0yNjIuMjYtODcuMjdzLTI2Mi4yNiw4Ny4yNy0yNjIuMjYsODcuMjdjLTIzLjg4LDE0LjMzLTI2LjIzLDQxLTUuMjEsNTkuMjlsMjUsMjEuNzljMjEsMTguMjksNDIuODYsMzcsNDguNTMsNDEuNTlsNC44LDQuOEExNDYuNTYsMTQ2LjU2LDAsMCwxLDEwMy42NCw0NjcuNDJsLTQuOC00Ljc5Yy00LjU5LTUuNjgtMTguNTctMjIuMDctMzEuMDYtMzYuNDRzLTI2LjkyLTMuNzEtMzIuMDYsMjMuNjdjMCwwLTQuNzIsMjUuMTEtNC43Miw2NC41NSwwLDIxMy45MSwyOTcuNDUsNDIxLjcyLDI5Ny40NSw0MjEuNzIsMjIuODQsMTYsMzkuOTQsNi4yNywzOC0yMS41M2wtOC4xLTExNi4zOGMtMS45NC0yNy44LTQuMTUtNTYuNDctNC45MS02My43M1Y3MjcuN2ExNDYuNTYsMTQ2LjU2LDAsMSwxLDI5My4xMiwwdjYuNzljLS43Niw3LjI2LTMsMzUuOTMtNC45MSw2My43M2wtOC4xLDExNi4zOGMtMS45NCwyNy44LDE1LjE2LDM3LjQ4LDM4LDIxLjUzLDAsMCwyOTcuNDUtMjA3LjgxLDI5Ny40NS00MjEuNzIsMC0zOS40NC00LjcyLTY0LjU1LTQuNzItNjQuNTVDOTU5LjE0LDQyMi40OCw5NDQuNzEsNDExLjgzLDkzMi4yMiw0MjYuMTlaIgogICAgIGZpbGw9InVybCgjYSkiCiAgICAgaWQ9InBhdGgyMDEyIiAvPgo8L3N2Zz4K" />
+    <script defer src="https://unpkg.com/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Theme Persistence  -->
+    <script>
+        let explicitelyPreferScheme = false
+        if (window.localStorage) {
+            if (localStorage.getItem('colorMode') === 'dark') {
+                document.documentElement.classList.add('dark');
+                explicitelyPreferScheme = 'dark'
+            } else if (localStorage.getItem('colorMode') === 'light') {
+                document.documentElement.classList.remove('dark');
+                explicitelyPreferScheme = 'light'
+            };
+        };
+        if (explicitelyPreferScheme !== 'light' && window.matchMedia('(prefers-color-scheme:dark)').matches) {
+            document.documentElement.classList.add('dark')
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ab4adf',
+                        hover: '#9E2FDA',
+                        background: '#191D24',
+                        lprimary: '#9E2FDA',
+                        lhover: '#ab4adf',
+                        lbackground: '#eae2d6',
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            html { font-family: 'Plus Jakarta Sans', sans-serif; }
+            html { @apply  min-h-screen flex flex-col px-4; }
+            body { @apply w-full max-w-6xl mx-auto bg-background dark:bg-lbackground text-primary dark:text-lprimary; }
+            header { @apply fixed top-6 right-1/2 translate-x-1/2 w-full max-w-6xl px-4 self-center flex z-50; }
+            footer { @apply fixed bottom-6 left-0 w-full flex justify-between items-center px-6; }
+            section { @apply py-16 flex flex-col min-h-screen items-center justify-start; }
+            h1 { @apply text-4xl font-extrabold tracking-wide mb-3 text-center; }
+            h2 { @apply text-2xl font-bold tracking-wide mt-4 mb-3 text-center; }
+            h3 { @apply font-bold text-xl pt-6 uppercase; }
+            p { @apply text-center tracking-wide; }
+            button { @apply w-fit mx-auto text-background font-bold text-xs tracking-wide uppercase bg-primary hover:bg-hover dark:bg-lprimary dark:hover:bg-lhover dark:text-lbackground trans px-2 py-1 text-center rounded; }
+        }
+        @layer utilities {
+            .trans { @apply transition duration-300 ease-in-out; }
+            .mobile-btn { @apply text-lg w-32 mb-1; }
+            .sticky-nav { @apply sticky top-6 h-full z-50 flex justify-center w-fit mx-auto; }
+            .underlay { @apply bg-background/60 dark:bg-lbackground/60 backdrop-blur-sm px-4 py-6; }
+            .overlay { @apply bg-primary/10 dark:bg-lprimary/10 backdrop-blur-lg shadow-lg rounded-lg py-4 px-16 flex flex-col justify-center items-center; }
+            .modal-container { @apply fixed left-0 top-0 bottom-0 right-0 z-50 flex justify-center items-center; }
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        html::-webkit-scrollbar {
+            display: none;
+        }
+        [x-cloak] {
+            display: none !important;
+        }
+        .icon {
+            stop-color: #ab4adf;
+        }
+        .icon-dark {
+            stop-color: #9E2FDA;
+        }
+    </style>
+</head>
+
+<body x-data=" {menu: ['Home', 'Carousel', 'Popups', 'Menus']}">
+    <header x-data="{ openMenu : false }">
+        <!-- Theme Selector -->
+        <div>
+            <button @click="darkMode = 'true'">L</button>
+            <button @click="darkMode = 'false'">D</button>
+        </div>
+        <!-- Mobile Menu -->
+        <!-- Menu Button -->
+        <button class="absolute top-0 right-4 md:hidden mobile-btn" @click="openMenu = !openMenu">Menu</button>
+        <nav class="flex flex-col absolute top-0 right-4 z-10" :class="openMenu ? 'visible' : 'invisible' " x-cloak>
+            <!-- Close Button -->
+            <button class=" mobile-btn flex flex-row justify-center items-center" @click="openMenu = !openMenu">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <!-- Menu -->
+            <ul class="z-10 transition-all" :class="openMenu ? 'translate-x-0' : 'translate-x-full'">
+                <template x-for="menu in menu">
+                    <li>
+                        <a :href="'#' + menu" class="inline-flex">
+                            <button x-text="menu" class="mobile-btn" @click="openMenu = !openMenu"></button>
+                        </a>
+                    </li>
+                </template>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- Home -->
+        <div class="flex flex-col justify-end h-[50vh] mb-4" x-data="{
+                name: 'Home',
+                title: 'AlpineJs',
+                description: 'Learning AlpineJs with TailwindCSS CDN.'}" :id="name">
+            <h1 x-text="title" class="text-6xl normal-case"></h1>
+            <p x-html="description" />
+        </div>
+        <!-- Main Menu -->
+        <div class="sticky-nav">
+            <nav class="hidden md:flex mx-auto">
+                <ul class="flex flex-row gap-[2.75px]">
+                    <template x-for="menu in menu">
+                        <li>
+                            <a :href="'#' + menu" class="inline-flex" aria-current="true">
+                                <button x-text="menu"></button>
+                            </a>
+                        </li>
+                    </template>
+                </ul>
+            </nav>
+        </div>
+        <!-- Carousel -->
+        <div x-data="{
+        name: 'Carousel'}" class="mt-[50vh]">
+            <section :id="name">
+                <h1 x-text="name"></h1>
+                <script>
+                    function carousel() {
+                        return {
+                            images: [
+                                'https://www.pixel4k.com/wp-content/uploads/2020/01/evening-landscape-minimal_1580055578.jpg',
+                                'https://www.pixelstalk.net/wp-content/uploads/2016/06/Minimal-sky-clouds-sun-mountains-lake-landscape-wallpapers-1920x1080.jpg',
+                                'https://wallpapersmug.com/download/3840x2160/f0932e/landscape-minimal-stars-cold-5k.jpg',
+                                'https://images.hdqwalls.com/download/minimalist-landscape-to-2560x1440.jpg'
+                            ],
+                            activeImage: null,
+                            prev() {
+                                let index = this.images.indexOf(this.activeImage);
+                                if (index === 0) index = this.images.length;
+                                this.activeImage = this.images[index - 1];
+                            },
+                            next() {
+                                let index = this.images.indexOf(this.activeImage);
+                                if (index === this.images.length - 1) index = -1;
+                                this.activeImage = this.images[index + 1];
+                            },
+                            init() {
+                                this.activeImage = this.images.length > 0 ? this.images[0] : null
+                            }
+                        }
+                    }
+                </script>
+                <div x-data="carousel()">
+                    <div x-data class="relative">
+                        <template x-for="image in images">
+                            <div x-show="activeImage === image">
+                                <img :src="activeImage" alt="" class="rounded-xl">
+                            </div>
+                        </template>
+                        <button @click="prev" class="absolute left-1/2 -translate-x-[108%] bottom-2">&#8672;</button>
+                        <button @click="next" class="absolute left-1/2 translate-x-[8%] bottom-2">&#8674;</button>
+                    </div>
+                    <div class="flex gap-1 mt-1 items-center">
+                        <template x-for="image in images">
+                            <a @click="activeImage = image" class="w-full cursor-pointer">
+                                <img :src="image" alt="" class="rounded-xl object-cover"
+                                    :class="{ 'border-2 border-primary dark:border-lprimary' : activeImage ===  image}">
+                            </a>
+                        </template>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- PopUps -->
+        <div x-data="{
+        name: 'Popups'}">
+            <section :id=" name">
+                <h1 x-text="name"></h1>
+                <!-- Popups Container -->
+                <div class="flex flex-col flex-grow">
+                    <!-- Toast -->
+                    <div class="flex flex-col flex-grow justify-center items-center z-50">
+                        <h2>Toast</h2>
+                        <script>
+                            function toastNotification() {
+                                return {
+                                    open: false,
+                                    title: "Toast",
+                                    message: "Message",
+                                    success: false,
+                                    openToast() {
+                                        this.open = true
+                                        setTimeout(() => {
+                                            this.open = false
+                                        }, 4500)
+                                    }
+                                }
+                            }
+                        </script>
+                        <div x-data="toastNotification()">
+                            <div x-show="open"
+                                class=" overlay fixed top-6 right-4 transform-gpu transition-transform duration-500 ease"
+                                x-transition:enter-start="-translate-y-40" x-transition:enter-end="translate-y-0"
+                                x-transition:leave-start="translate-y-0" x-transition:leave-end="-translate-y-40">
+                                <button @click="open = false" class="absolute top-2 right-2">X</button>
+                                <h2 x-text="title" class="m-0"></h2>
+                                <p x-text="message"></p>
+                            </div>
+                            <button @click="openToast()">Toast</button>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                    <div class="flex flex-col flex-grow justify-center">
+                        <h2>Modal</h2>
+                        <div x-data="{open: false}" class="flex flex-col">
+                            <button @click="open = true" class="">Open</button>
+                            <!-- Container -->
+                            <div x-show="open" class="underlay modal-container" x-transition>
+                                <!-- Content -->
+                                <div @click.outside="open = false" class="overlay w-full max-w-6xl h-full relative">
+                                    <button @click="open = false" class="absolute top-2 right-2">X</button>
+                                    <h1>Modal Content</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Popover -->
+                    <div class="flex flex-col flex-grow justify-center">
+                        <h2>Popover</h2>
+                        <div x-data="{
+                    show: false,
+                    title: 'Popover',
+                    message: 'Content'
+                    }" class="relative flex justify-center">
+                            <button @click="show = true">Pop</button>
+                            <!-- Container -->
+                            <div x-show="show" @click.outside="show = false" x-transition
+                                class="absolute bottom-[150%] overlay p-6">
+                                <!-- Content -->
+                                <button @click="show = false" class="absolute top-2 right-2">X</button>
+                                <h2 x-text="title" class="my-0"></h2>
+                                <p x-text="message"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hoverover -->
+                    <div class="flex flex-col flex-grow justify-center">
+                        <h2>Hoverover</h2>
+                        <div x-data="{
+                    show: false,
+                    title: 'Hoverover',
+                    message: 'Content'
+                    }" class="relative flex justify-center">
+                            <button @mouseover="show = true" @mouseover.away="show = false">Hover</button>
+                            <!-- Container -->
+                            <div x-show="show" @click.outside="show = false" x-transition
+                                class="absolute bottom-[150%] overlay !px-12">
+                                <!-- Content -->
+                                <h2 x-text="title" class="my-0"></h2>
+                                <p x-text="message"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div x-data="{
+        name: 'Menus'}">
+            <section :id="name">
+                <h1 x-text="name"></h1>
+            </section>
+        </div>
+        <footer>
+            <div class="flex w-8 p-0 rounded-full bg-cover mx-auto">
+                <a href="https://tm.oxenfree.net" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        style="width: 100%; height: 100%;" viewBox="0 0 1000 957.79">
+                        <defs>
+                            <radialGradient id="a" cx="500" cy="488.64" r="489.56" gradientUnits="userSpaceOnUse">
+                                <stop class="icon" offset="0" :class="{ 'icon-dark': darkMode === 'true' }" />
+                                <stop class="icon" offset=" 0.24" stop-opacity="0.99"
+                                    :class="{ 'icon-dark': darkMode === 'true' }" />
+                                <stop class="icon" offset=" 0.38" top-opacity="0.95"
+                                    :class="{ 'icon-dark': darkMode === 'true' }" />
+                                <stop class="icon" offset=" 0.49" stop-opacity="0.89"
+                                    :class="{ 'icon-dark': darkMode === 'true' }" />
+                                <stop class="icon" offset=" 0.6" stop-opacity="0.8"
+                                    :class="{ 'icon-dark': darkMode === 'true' }" />
+                                <stop class="icon" offset="0.69" stop-opacity="0.68"
+                                    :class="{ 'icon-dark': darkMode === 'true' }" />
+                                <stop class="icon" offset=" 0.78" stop-opacity="0.54"
+                                    :class="{ 'icon-dark': darkMode === 'true' }" />
+                                <stop class="icon" offset=" 0.86" stop-opacity="0.37"
+                                    :class="{ 'icon-dark': darkMode === 'true' }" />
+                                <stop class="icon" offset=" 0.94" stop-opacity="0.18"
+                                    :class="{ 'icon-dark': darkMode === 'true' }" />
+                                <stop class="icon" offset=" 1" stop-opacity="0"
+                                    :class="{ 'icon-dark': darkMode === 'true' }" />
+                            </radialGradient>
+                        </defs>
+                        <path
+                            d="M960.79,415.69c-13.32,15.32-28.22,32.79-33.12,38.84l-5.11,5.12a156.25,156.25,0,0,1-221-221l5.11-5.12c6-4.89,29.34-24.85,51.74-44.34L785.15,166c22.41-19.49,19.91-47.94-5.56-63.21,0,0-155.08-93-279.59-93s-279.59,93-279.59,93c-25.47,15.27-28,43.72-5.56,63.21l26.71,23.23c22.4,19.49,45.69,39.45,51.74,44.34l5.11,5.12a156.25,156.25,0,0,1-221,221l-5.11-5.12c-4.9-6-19.8-23.52-33.12-38.84s-28.7-4-34.18,25.23c0,0-5,26.77-5,68.82,0,228,317.11,449.59,317.11,449.59,24.35,17,42.58,6.69,40.52-22.94L349,812.31c-2.07-29.63-4.42-60.21-5.24-67.95v-7.23a156.25,156.25,0,0,1,312.5,0v7.23c-.82,7.74-3.17,38.32-5.24,67.95l-8.64,124.08c-2.06,29.63,16.17,40,40.52,22.94,0,0,317.11-221.54,317.11-449.59,0-42.05-5-68.82-5-68.82C989.49,411.73,974.11,400.38,960.79,415.69Z"
+                            transform="translate(0 -9.74)" fill="url(#a)" />
+                    </svg>
+                </a>
+            </div>
+        </footer>
+    </main>
+</body>
+
+</html>
